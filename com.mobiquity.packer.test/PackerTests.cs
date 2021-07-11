@@ -43,9 +43,14 @@ namespace com.mobiquity.packer.test
         public void Test_Packer_Pack()
         {
             var outputString = Packer.pack(inputFilePath);
+            
+            var outputLinesResults = outputString.Trim().Split(Environment.NewLine);
 
-            var outputLinesAsString = string.Join("\n", outputLines);            
-            Assert.AreEqual(outputString, outputLinesAsString);
+            Assert.AreEqual(outputLinesResults.Length, outputLines.Count);
+            for (int i = 0; i < outputLinesResults.Length; i++)
+            {
+                Assert.AreEqual(outputLinesResults[i], outputLines[i]);
+            }            
         }
 
         private List<string> ReadLinesFromFilePath(string filePath)

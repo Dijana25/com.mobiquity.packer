@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace com.mobiquity.packer
 {
@@ -16,7 +13,7 @@ namespace com.mobiquity.packer
         public static PackageConfiguration ParsePackageConfiguration(string line)
         {
             PackageConfiguration configuration = null;
-            string[] packageConfigParts = line.Split(Constants.CONFIG_DELIMITER);
+            string[] packageConfigParts = line.Split(Constants.PACKAGE_CONFIG_DELIMITER);
 
             try
             {
@@ -31,7 +28,10 @@ namespace com.mobiquity.packer
 
                         foreach (var itemPart in itemsPart)
                         {
-                            string[] itemElements = itemPart.Replace(Constants.LEFT_BRACKET, Constants.EMPTY_STRING).Replace(Constants.RIGHT_BRACKET, Constants.EMPTY_STRING).Split(Constants.ITEM_ELEMENTS_DELIMITER);
+                            string[] itemElements = itemPart
+                                .Replace(Constants.LEFT_BRACKET, Constants.EMPTY_STRING)
+                                .Replace(Constants.RIGHT_BRACKET, Constants.EMPTY_STRING)
+                                .Split(Constants.PACKAGE_ITEM_ELEMENTS_DELIMITER);
 
                             if (itemElements.Length == 3)
                             {
@@ -39,7 +39,7 @@ namespace com.mobiquity.packer
                                     int.Parse(itemElements[0]),
                                     double.Parse(itemElements[1]),
                                     double.Parse(itemElements[2].Replace(Constants.EURO_SYMBOL, Constants.EMPTY_STRING))
-                                    ));
+                                ));
                             }
                             else
                             {
@@ -49,8 +49,9 @@ namespace com.mobiquity.packer
                         }
 
                         if (packageItemsList.Count > 0)
+                        {
                             configuration = new PackageConfiguration(packageCapacity, packageItemsList);
-
+                        }
                     }
                 }
             }
