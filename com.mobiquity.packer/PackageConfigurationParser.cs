@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace com.mobiquity.packer
 {
-    /*
-     * A class which contains a static method that is responsible for parsing a single configuration line
-     * and return an PackageConfiguration object 
-     */
     public class PackageConfigurationParser
     {
         /*
+         * A method that is parsing a single configuration line
          * Input: line that contains package capaity and available items
          * Output: PackageConfiguration object
          */
@@ -26,7 +23,7 @@ namespace com.mobiquity.packer
                 if (packageConfigParts.Length == 2)
                 {
                     int packageCapacity = int.Parse(packageConfigParts[0]);
-                    string[] itemsPart = packageConfigParts[1].Split(Constants.EMPTY_SPACE);
+                    string[] itemsPart = packageConfigParts[1].Trim().Split(Constants.EMPTY_SPACE);
 
                     if (itemsPart.Length > 0)
                     {
