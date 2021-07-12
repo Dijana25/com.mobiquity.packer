@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.mobiquity.packer.Algorithm;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,9 @@ namespace com.mobiquity.packer
 {
     public class Packer
     {
-        /**
+        private static ILargestCostAlgorithm algorithm = new LargestCostAlgorithmDP();
+
+        /*
          * A method that finds the items with largest costs for a set of cases given in a file
          * Input: a valid absolute file path 
          * Output: a string containing the solutions for each case in separate lines         
@@ -50,7 +53,7 @@ namespace com.mobiquity.packer
                 throw new APIException("No valid configuration", line);
             }
 
-            var selectedItems = LargestCostAlgorithm.FindItemsWithLargestTotalCost(configuration.Items, configuration.Capacity);
+            var selectedItems = algorithm.FindItemsWithLargestTotalCost(configuration.Items, configuration.Capacity);
 
             if (selectedItems.Count == 0)
             {

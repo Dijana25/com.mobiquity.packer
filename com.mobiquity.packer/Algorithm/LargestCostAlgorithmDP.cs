@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.mobiquity.packer.Algorithm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,9 +9,9 @@ namespace com.mobiquity.packer
      * A class that contains a static method which uses dynamic programming
      * to solve the 0-1 Knapsack problem
      */
-    public class LargestCostAlgorithm
+    public class LargestCostAlgorithmDP : ILargestCostAlgorithm
     {
-        public static List<Item> FindItemsWithLargestTotalCost(List<Item> items, int packageWeight)
+        public List<Item> FindItemsWithLargestTotalCost(List<Item> items, int packageWeight)
         {                        
             /*
              * if exists at least one decimal weight in the items, multiply all weights and the capacity by 100
@@ -89,7 +90,7 @@ namespace com.mobiquity.packer
             return selectedItems;            
         }
 
-        public static bool ExistItemsWithDecimalWeight(List<Item> items)
+        private bool ExistItemsWithDecimalWeight(List<Item> items)
         {
             foreach (var item in items)
             {
