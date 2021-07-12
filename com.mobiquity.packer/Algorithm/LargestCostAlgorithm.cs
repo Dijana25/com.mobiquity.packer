@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace com.mobiquity.packer
 {
+    /*
+     * A class that contains a static method which uses dynamic programming
+     * to solve the 0-1 Knapsack problem
+     */
     public class LargestCostAlgorithm
     {
         public static List<Item> FindItemsWithLargestTotalCost(List<Item> items, int packageWeight)

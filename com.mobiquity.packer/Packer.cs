@@ -8,6 +8,11 @@ namespace com.mobiquity.packer
 {
     public class Packer
     {
+        /**
+         * A method that finds the items with largest costs for a set of cases given in a file
+         * Input: a valid absolute file path 
+         * Output: a string containing the solutions for each case in separate lines         
+         */
         public static string pack(string filePath)
         {
             StringBuilder packedPackages = new StringBuilder();            
@@ -22,7 +27,7 @@ namespace com.mobiquity.packer
                     packedPackages.Append(includedItems + Environment.NewLine);                    
                 }
             }
-            catch(APIException ex)
+            catch(IOException ex)
             {
                 packedPackages.Clear();                   
             }
@@ -30,6 +35,10 @@ namespace com.mobiquity.packer
             return packedPackages.ToString();
         }
 
+        /**
+         * Input: a single test case line in the format: [capacity] : ([index],[weight],[€cost])
+         * Output: a comma-separated list of items indexes, or '-' if no items in the solution    
+         */
         public static string processLine(string line)
         {
             List<int> itemsIndexes = new List<int>();
@@ -38,7 +47,7 @@ namespace com.mobiquity.packer
 
             if (configuration == null)
             {
-                throw new APIException("No correct configuration");
+                throw new APIException("No valid configuration", line);
             }
 
             var selectedItems = LargestCostAlgorithm.FindItemsWithLargestTotalCost(configuration.Items, configuration.Capacity);
